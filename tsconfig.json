@@ -27,8 +27,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "composite": true,
-    "outDir": "./dist/esm",
+    "outDir": "./dist",
     "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true
   },
   "include": ["playground/datepicker"]
   // "exclude": ["node_modules", "dist", "website"],
