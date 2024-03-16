@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -143,7 +143,7 @@ const SelectMonth = () => {
       </View>
 
       <View style={[style.monthList, utils.flexDirection]}>
-        {[...Array(12).keys()].map(item => {
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(item => {
           const disabled = utils.checkSelectMonthDisabled(mainState.activeDate, item);
           return (
             <TouchableOpacity

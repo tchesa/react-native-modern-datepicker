@@ -12,3 +12,4 @@ node_modules
 
 # Ignore junk files
 .DS_Store
+tsconfig.tsbuildinfo

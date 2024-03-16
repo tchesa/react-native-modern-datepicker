@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -33,11 +33,15 @@ const TimeScroller = ({
   data = ['', '', ...data, '', ''];
 
   useEffect(() => {
-    scrollListener.current && clearInterval(scrollListener.current);
+    if (scrollListener.current !== undefined) {
+      clearInterval(parseInt(scrollListener.current));
+    }
     scrollListener.current = scrollAnimatedValue.addListener(({value}) => (active.current = value));
 
     return () => {
-      clearInterval(scrollListener.current);
+      if (scrollListener.current !== undefined) {
+        clearInterval(parseInt(scrollListener.current));
+      }
     };
   }, [scrollAnimatedValue]);
 

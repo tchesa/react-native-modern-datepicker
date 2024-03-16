@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import {useState, useMemo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, LayoutChangeEvent} from 'react-native';
 
 import {Options, useCalendar} from '../DatePicker';

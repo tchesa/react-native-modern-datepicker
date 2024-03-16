@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import {Animated, Easing, I18nManager, StyleProp, View, ViewStyle} from 'react-native';
+import {Animated, Easing, I18nManager, StyleProp, ViewStyle} from 'react-native';
 import moment, {Moment} from 'moment-jalaali';
 import {ChangeMonthAnimationType, Configs, Mode} from './types';
 
