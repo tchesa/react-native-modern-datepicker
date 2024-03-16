@@ -1,9 +1,9 @@
 {
   "name": "@tchesa/react-native-modern-datepicker",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A customizable calendar, time & month picker for React Native (including Persian Jalaali calendar & locale)",
-  "module": "dist/esm/playground/datepicker/index.js",
-  "types": "dist/esm/playground/datepicker/index.d.js",
+  "main": "dist/esm/playground/datepicker/index.js",
+  "types": "dist/esm/playground/datepicker/index.d.ts",
   "scripts": {
     "build": "tsc  -b ./tsconfig.json",
     "playground": "cd playground && react-native start"
