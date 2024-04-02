@@ -36,6 +36,7 @@ export const defaultOptions: Options = {
   headerAnimationDistance: 100,
   daysAnimationDistance: 200,
   badgeColor: '#C22A43',
+  dayItemSize: 27,
 };
 
 const CalendarContext = createContext<CalendarContextType>({

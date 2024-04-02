@@ -7,7 +7,7 @@ import useCalendar from '../hooks/useCalendar';
 const Days = () => {
   const {options, state, utils, onDateChange, badgeDates } = useCalendar();
   const [mainState, setMainState] = state;
-  const [itemSize, setItemSize] = useState(0);
+  const [width, setWidth] = useState(0);
   const style = styles(options);
   const days = useMemo(() => utils.getMonthDays(mainState.activeDate), []);
 
@@ -21,30 +21,41 @@ const Days = () => {
   };
 
   const changeItemHeight = ({nativeEvent}: LayoutChangeEvent) => {
-    const {width} = nativeEvent.layout;
-    !itemSize && setItemSize(parseInt((width / 7).toFixed(2)) * 1 - 0.5);
+    setWidth(nativeEvent.layout.width);
   };
+
+  const margin = useMemo(() => {
+    return (width - options.dayItemSize * 7) / 14;
+  }, [options.dayItemSize, width])
+
+  const today = utils.getToday();
 
   return (
     <View style={[style.container, utils.flexDirection]} onLayout={changeItemHeight}>
       {days.map((day, n) => (
-        <View
+        <TouchableOpacity
           key={n}
+          onPress={() => {
+            !day.disabled && onSelectDay(day.date)
+          }}
+          activeOpacity={0.8}
           style={{
-            width: itemSize,
-            height: itemSize,
-          }}>
+            width: options.dayItemSize + margin * 2,
+            height: options.dayItemSize + margin * 2,
+            padding: margin,
+          }}
+          disabled={!day}>
           {day && (
-            <TouchableOpacity
+            <View
               style={[
                 style.dayItem,
                 {
-                  borderRadius: itemSize / 2,
+                  borderRadius: options.dayItemSize / 2,
                 },
+                today === day.date && style.currentDayItem,
                 mainState.selectedDate === day.date && style.dayItemSelected,
               ]}
-              onPress={() => !day.disabled && onSelectDay(day.date)}
-              activeOpacity={0.8}>
+            >
               <Text
                 style={[
                   style.dayText,
@@ -56,9 +67,9 @@ const Days = () => {
               {badgeDates?.[day.date] && (
                 <View style={style.badge} />
               )}
-            </TouchableOpacity>
+           </View> 
           )}
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -75,11 +86,17 @@ const styles = (theme: Options) =>
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: 3,
       position: 'relative',
+      backgroundColor: theme.dayBackgroundColor,
+      borderWidth: 1,
+      borderColor: theme.dayBackgroundColor,
     },
     dayItemSelected: {
       backgroundColor: theme.mainColor,
+      borderColor: theme.mainColor,
+    },
+    currentDayItem: {
+      borderColor: theme.mainColor,
     },
     dayText: {
       fontFamily: theme.defaultFont,
@@ -101,7 +118,7 @@ const styles = (theme: Options) =>
       borderRadius: 3,
       backgroundColor: theme.badgeColor,
       position: 'absolute',
-      bottom: 5,
+      bottom: -9,
       right: '50%',
       transform: [{translateX: 3}],
     }
