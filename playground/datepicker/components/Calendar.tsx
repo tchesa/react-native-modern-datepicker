@@ -1,8 +1,10 @@
 import {useEffect} from 'react';
 import {View, StyleSheet, Text, Animated} from 'react-native';
 
-import {Header, Days} from '.';
-import {Options, useCalendar} from '../DatePicker';
+import type {Options} from '../DatePicker';
+import Header from './Header';
+import Days from './Days'
+import useCalendar from '../hooks/useCalendar';
 
 const Calendar = () => {
   const {options, state, utils, onSelectedChange} = useCalendar();
@@ -73,4 +75,4 @@ const styles = (theme: Options) =>
     },
   });
 
-export {Calendar};
+export default Calendar;

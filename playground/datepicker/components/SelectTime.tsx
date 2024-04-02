@@ -11,7 +11,8 @@ import {
   LayoutChangeEvent,
 } from 'react-native';
 
-import {Options, useCalendar} from '../DatePicker';
+import type {Options} from '../DatePicker';
+import useCalendar from '../hooks/useCalendar';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList<string>);
 
@@ -87,7 +88,7 @@ const TimeScroller = ({
           style.listItem,
         ]}>
         <Text style={style.listItemText}>
-          {utils.toPersianNumber(String(item).length === 1 ? '0' + item : item)}
+          {utils.toEnglish(String(item).length === 1 ? '0' + item : item)}
         </Text>
       </Animated.View>
     );
@@ -284,4 +285,4 @@ const styles = (theme: Options) =>
     },
   });
 
-export {SelectTime};
+export default SelectTime;

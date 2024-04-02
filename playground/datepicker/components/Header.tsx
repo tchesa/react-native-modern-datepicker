@@ -2,8 +2,9 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {View, TouchableOpacity, Text, Image, StyleSheet, Animated, I18nManager} from 'react-native';
 
-import {Options, useCalendar} from '../DatePicker';
-import {ChangeMonthAnimationType} from '../types';
+import type {Options } from '../DatePicker';
+import type {ChangeMonthAnimationType} from '../types';
+import useCalendar from '../hooks/useCalendar';
 
 const Header = ({changeMonth}: {changeMonth: (type: ChangeMonthAnimationType) => void}) => {
   const {options, state, utils, disableDateChange, minimumDate, maximumDate, mode} = useCalendar();
@@ -204,4 +205,4 @@ Header.propTypes = {
   changeMonth: PropTypes.func,
 };
 
-export {Header};
+export default Header;
