@@ -1,11 +1,10 @@
-import React, {useReducer, useState } from 'react';
+import React, {useEffect, useReducer, useState } from 'react';
 import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
-import PropTypes from 'prop-types';
 import Calendar from './components/Calendar';
 import SelectMonth from './components/SelectMonth';
 import SelectTime from './components/SelectTime';
 import Utils from './Utils';
-import type {Configs, Mode} from './types';
+import type {CalendarState, Configs, Mode} from './types';
 import CalendarContext, { type CalendarContextType, defaultOptions } from './context/CalendarContext';
 
 type ActionType = 'set' | 'toggleMonth' | 'toggleTime';
@@ -66,13 +65,7 @@ type Props = {
   minuteInterval?: MinuteInterval;
   style?: StyleProp<ViewStyle>;
   badgeDates?: Record<string, boolean>;
-};
-
-export type CalendarState = {
-  activeDate: string;
-  selectedDate: string;
-  monthOpen: boolean;
-  timeOpen: boolean;
+  onCalendarStateChange?: (state: CalendarState) => void;
 };
 
 const DatePicker = ({
@@ -93,6 +86,7 @@ const DatePicker = ({
   minuteInterval = 5,
   style,
   badgeDates,
+onCalendarStateChange,
 }: Props) => {
   const calendarUtils = new Utils({
     minimumDate,
@@ -101,6 +95,13 @@ const DatePicker = ({
     mode,
   });
 
+  const state =useReducer(reducer, {
+    activeDate: current || calendarUtils.getToday(),
+    selectedDate: selected ? calendarUtils.getFormated(calendarUtils.getDate(selected)) : '',
+    monthOpen: mode === 'monthYear',
+    timeOpen: mode === 'time',
+  })
+  
   const contextValue: CalendarContextType = {
     onSelectedChange,
     onDateChange,
@@ -116,15 +117,14 @@ const DatePicker = ({
     minuteInterval,
     onTimeChange,
     badgeDates,
-    state: useReducer(reducer, {
-      activeDate: current || calendarUtils.getToday(),
-      selectedDate: selected ? calendarUtils.getFormated(calendarUtils.getDate(selected)) : '',
-      monthOpen: mode === 'monthYear',
-      timeOpen: mode === 'time',
-    }),
+    state,
   };
   const [minHeight, setMinHeight] = useState(300);
   const themedStyles = styles(contextValue.options);
+
+  useEffect(() => {
+    onCalendarStateChange?.(state[0]);
+  }, [state[0], onCalendarStateChange])
 
   const renderBody = () => {
     switch (contextValue.mode) {
@@ -172,22 +172,6 @@ const styles = (theme: Options) =>
     },
   });
 
-const optionsShape = {
-  backgroundColor: PropTypes.string,
-  textHeaderColor: PropTypes.string,
-  textDefaultColor: PropTypes.string,
-  selectedTextColor: PropTypes.string,
-  mainColor: PropTypes.string,
-  textSecondaryColor: PropTypes.string,
-  borderColor: PropTypes.string,
-  defaultFont: PropTypes.string,
-  headerFont: PropTypes.string,
-  textFontSize: PropTypes.number,
-  textHeaderFontSize: PropTypes.number,
-  headerAnimationDistance: PropTypes.number,
-  daysAnimationDistance: PropTypes.number,
-};
-const modeArray: Array<Mode> = ['datepicker', 'calendar', 'monthYear', 'time'];
 const minuteIntervalArray = [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60] as const;
 export type MinuteInterval = typeof minuteIntervalArray[number];
 
@@ -208,25 +192,6 @@ DatePicker.defaultProps = {
   mode: 'datepicker',
   minuteInterval: 5,
   style: {},
-};
-
-DatePicker.propTypes = {
-  onSelectedChange: PropTypes.func,
-  onMonthYearChange: PropTypes.func,
-  onTimeChange: PropTypes.func,
-  onDateChange: PropTypes.func,
-  current: PropTypes.string,
-  selected: PropTypes.string,
-  minimumDate: PropTypes.string,
-  maximumDate: PropTypes.string,
-  selectorStartingYear: PropTypes.number,
-  selectorEndingYear: PropTypes.number,
-  disableDateChange: PropTypes.bool,
-  configs: PropTypes.object,
-  options: PropTypes.shape(optionsShape),
-  mode: PropTypes.oneOf(modeArray),
-  minuteInterval: PropTypes.oneOf(minuteIntervalArray),
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default DatePicker;
