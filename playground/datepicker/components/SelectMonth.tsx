@@ -18,7 +18,6 @@ const SelectMonth = () => {
     options,
     state,
     utils,
-    isGregorian,
     mode,
     minimumDate,
     maximumDate,
@@ -56,7 +55,7 @@ const SelectMonth = () => {
       let y = Number(utils.toEnglish(year));
       const date = utils.getDate(utils.validYear(mainState.activeDate, y));
       const activeDate =
-        month !== null ? (isGregorian ? date.month(month) : date.jMonth(month)) : date;
+        month !== null ? (date.month(month)) : date;
       setMainState({
         type: 'set',
         activeDate: utils.getFormated(activeDate),
@@ -77,7 +76,7 @@ const SelectMonth = () => {
 
   const onChangeYear = (text: string) => {
     if (Number(utils.toEnglish(text))) {
-      setYear(utils.toPersianNumber(text));
+      setYear(utils.toEnglish(text))
     }
   };
 
@@ -88,7 +87,7 @@ const SelectMonth = () => {
     } else if (y < selectorStartingYear) {
       y = selectorStartingYear;
     }
-    setYear(utils.toPersianNumber(y));
+    setYear(utils.toEnglish(String(y)));
   };
 
   const containerStyle = [

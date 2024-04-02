@@ -6,16 +6,7 @@ import {Options, useCalendar} from '../DatePicker';
 import {ChangeMonthAnimationType} from '../types';
 
 const Header = ({changeMonth}: {changeMonth: (type: ChangeMonthAnimationType) => void}) => {
-  const {
-    options,
-    state,
-    utils,
-    disableDateChange,
-    minimumDate,
-    maximumDate,
-    isGregorian,
-    mode,
-  } = useCalendar();
+  const {options, state, utils, disableDateChange, minimumDate, maximumDate, mode} = useCalendar();
   const [mainState, setMainState] = state;
   const style = styles(options);
   const [disableChange, setDisableChange] = useState(false);
@@ -38,7 +29,7 @@ const Header = ({changeMonth}: {changeMonth: (type: ChangeMonthAnimationType) =>
     changeMonthAnimation(type);
     const modificationNumber = type === 'NEXT' ? 1 : -1;
 
-    const unit = isGregorian ? 'month' : ('jMonth' as any);
+    const unit = 'month';
 
     const newDate = utils.getDate(mainState.activeDate).add(modificationNumber, unit);
     setMainState({
@@ -96,7 +87,7 @@ const Header = ({changeMonth}: {changeMonth: (type: ChangeMonthAnimationType) =>
                 })
               }>
               <Text style={style.headerText}>
-                {utils.toPersianNumber(utils.getTime(mainState.activeDate))}
+                {utils.toEnglish(String(utils.getTime(mainState.activeDate)))}
               </Text>
             </TouchableOpacity>
           )}
@@ -112,7 +103,7 @@ const Header = ({changeMonth}: {changeMonth: (type: ChangeMonthAnimationType) =>
           <Text style={style.headerText}>{utils.getMonthYearText(lastDate).split(' ')[1]}</Text>
           {mode === 'datepicker' && (
             <Text style={style.headerText}>
-              {utils.toPersianNumber(utils.getTime(mainState.activeDate))}
+              {utils.toEnglish(String(utils.getTime(mainState.activeDate)))}
             </Text>
           )}
         </Animated.View>
