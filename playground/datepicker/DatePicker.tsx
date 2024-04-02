@@ -52,7 +52,6 @@ type CalendarContextType = {
   onSelectedChange?: (selectedDate: string) => void;
   onDateChange?: (formattedDate: string) => void;
   disableDateChange: boolean;
-  isGregorian: boolean;
   minimumDate: string;
   maximumDate: string;
   selectorStartingYear: number;
@@ -69,7 +68,6 @@ const CalendarContext = createContext<CalendarContextType>({
   utils: new Utils({
     minimumDate: '',
     maximumDate: '',
-    isGregorian: true,
     configs: {},
     reverse: false,
     mode: 'datepicker',
@@ -84,7 +82,6 @@ const CalendarContext = createContext<CalendarContextType>({
     () => null,
   ],
   disableDateChange: false,
-  isGregorian: false,
   minimumDate: '',
   maximumDate: '',
   selectorStartingYear: 0,
@@ -125,7 +122,6 @@ type Props = {
   selectorStartingYear?: number;
   selectorEndingYear?: number;
   disableDateChange?: boolean;
-  isGregorian?: boolean;
   configs?: Configs;
   reverse?: true | false | 'unset';
   options?: Options;
@@ -153,7 +149,6 @@ const DatePicker = ({
   selectorStartingYear = 0,
   selectorEndingYear = 3000,
   disableDateChange = false,
-  isGregorian = true,
   configs,
   reverse = 'unset',
   options,
@@ -164,7 +159,6 @@ const DatePicker = ({
   const calendarUtils = new Utils({
     minimumDate,
     maximumDate,
-    isGregorian,
     configs,
     reverse,
     mode,
@@ -175,13 +169,12 @@ const DatePicker = ({
     onSelectedChange,
     onDateChange,
     mode,
-    reverse: reverse === 'unset' ? !isGregorian : reverse,
+    reverse: reverse === 'unset' ? false : reverse,
     options: {...defaultOptions, ...options},
     utils: calendarUtils,
     disableDateChange,
     minimumDate,
     maximumDate,
-    isGregorian,
     selectorStartingYear,
     selectorEndingYear,
     onMonthYearChange,
@@ -274,7 +267,6 @@ DatePicker.defaultProps = {
   selectorStartingYear: 0,
   selectorEndingYear: 3000,
   disableDateChange: false,
-  isGregorian: true,
   configs: {},
   reverse: 'unset',
   options: {},
@@ -295,7 +287,6 @@ DatePicker.propTypes = {
   selectorStartingYear: PropTypes.number,
   selectorEndingYear: PropTypes.number,
   disableDateChange: PropTypes.bool,
-  isGregorian: PropTypes.bool,
   configs: PropTypes.object,
   reverse: PropTypes.oneOf([true, false, 'unset']),
   options: PropTypes.shape(optionsShape),
