@@ -11,7 +11,8 @@ import {
   I18nManager,
 } from 'react-native';
 
-import {Options, useCalendar} from '../DatePicker';
+import type {Options} from '../DatePicker';
+import useCalendar from '../hooks/useCalendar';
 
 const SelectMonth = () => {
   const {
@@ -255,4 +256,4 @@ const styles = (theme: Options) =>
     },
   });
 
-export {SelectMonth};
+export default SelectMonth;

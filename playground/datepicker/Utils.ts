@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 import {Animated, Easing, I18nManager, StyleProp, ViewStyle} from 'react-native';
 import moment, {Moment} from 'moment';
-import {ChangeMonthAnimationType, Configs, Mode} from './types';
+import type {ChangeMonthAnimationType, Configs, Mode} from './types';
 
 const m = moment();
 
@@ -239,4 +239,4 @@ class Utils {
   };
 }
 
-export {Utils};
+export default Utils;
