@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import PropTypes from 'prop-types';
 import {View, TouchableOpacity, Text, Image, StyleSheet, Animated, I18nManager} from 'react-native';
 
 import type {Options } from '../DatePicker';
@@ -196,13 +195,5 @@ const styles = (theme: Options) =>
       marginRight: 5,
     },
   });
-
-Header.defaultProps = {
-  changeMonth: () => null,
-};
-
-Header.propTypes = {
-  changeMonth: PropTypes.func,
-};
 
 export default Header;

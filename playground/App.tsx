@@ -65,9 +65,9 @@ export default function App() {
           selectedTextColor: colors['white'],
           mainColor: colors['oxygen-blue'],
           textSecondaryColor: colors['light-black'],
-          defaultFont: 'Lexend-Regular',
+          // defaultFont: 'Lexend-Regular',
           borderColor: colors['graph-gray'],
-          headerFont: 'Lexend-SemiBold',
+          // headerFont: 'Lexend-SemiBold',
           dayBackgroundColor: '#E4F3FF88',
           textFontSize: 14,
         }}
@@ -76,7 +76,9 @@ export default function App() {
         // mode={mode}
         mode="calendar"
         badgeDates={badgeDates.current}
-
+        onCalendarStateChange={state => {
+          console.log('onCalendarStateChange', state);
+        }}
         // current={
         //   date ? format(date, MODERN_DATEPICKER_CALENDAR_FORMAT) : undefined
         // }

@@ -1,7 +1,7 @@
 import {Dispatch, createContext} from 'react';
 import Utils from '../Utils';
-import {Action, CalendarState, MinuteInterval, Options} from '../DatePicker';
-import {Mode} from '../types';
+import type {Action, MinuteInterval, Options} from '../DatePicker';
+import type {CalendarState, Mode} from '../types';
 
 export type CalendarContextType = {
   mode: Mode;

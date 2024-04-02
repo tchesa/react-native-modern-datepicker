@@ -15,3 +15,10 @@ export type Configs = {
 };
 
 export type ChangeMonthAnimationType = 'NEXT' | 'PREVIOUS';
+
+export type CalendarState = {
+  activeDate: string;
+  selectedDate: string;
+  monthOpen: boolean;
+  timeOpen: boolean;
+};
