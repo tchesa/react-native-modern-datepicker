@@ -47,8 +47,6 @@ const styles = (theme: Options) =>
     daysName: {
       paddingBottom: 10,
       marginBottom: 0,
-      alignItems: 'center',
-      justifyContent: 'space-around',
       borderBottomColor: theme.borderColor,
       borderBottomWidth: 1,
       marginHorizontal: 15,
@@ -57,6 +55,8 @@ const styles = (theme: Options) =>
       fontFamily: theme.defaultFont,
       color: theme.textSecondaryColor,
       fontSize: theme.textFontSize,
+      width: `${100/7}%`,
+      textAlign: 'center',
     },
     daysContainer: {
       flex: 1,

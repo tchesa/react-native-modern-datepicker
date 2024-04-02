@@ -44,6 +44,8 @@ export type Options = {
   headerAnimationDistance: number;
   daysAnimationDistance: number;
   badgeColor: string;
+  dayBackgroundColor?: string;
+  dayItemSize: number;
 };
 
 type Props = {
@@ -59,7 +61,7 @@ type Props = {
   selectorEndingYear?: number;
   disableDateChange?: boolean;
   configs?: Configs;
-  options?: Options;
+  options?: Partial<Options>;
   mode?: Mode;
   minuteInterval?: MinuteInterval;
   style?: StyleProp<ViewStyle>;
