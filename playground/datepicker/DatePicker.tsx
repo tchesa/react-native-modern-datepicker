@@ -43,6 +43,7 @@ export type Options = {
   textHeaderFontSize: number;
   headerAnimationDistance: number;
   daysAnimationDistance: number;
+  badgeColor: string;
 };
 
 type Props = {
@@ -62,6 +63,7 @@ type Props = {
   mode?: Mode;
   minuteInterval?: MinuteInterval;
   style?: StyleProp<ViewStyle>;
+  badgeDates?: Record<string, boolean>;
 };
 
 export type CalendarState = {
@@ -88,6 +90,7 @@ const DatePicker = ({
   mode = 'datepicker',
   minuteInterval = 5,
   style,
+  badgeDates,
 }: Props) => {
   const calendarUtils = new Utils({
     minimumDate,
@@ -110,6 +113,7 @@ const DatePicker = ({
     onMonthYearChange,
     minuteInterval,
     onTimeChange,
+    badgeDates,
     state: useReducer(reducer, {
       activeDate: current || calendarUtils.getToday(),
       selectedDate: selected ? calendarUtils.getFormated(calendarUtils.getDate(selected)) : '',

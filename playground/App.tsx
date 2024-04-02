@@ -1,7 +1,12 @@
 import {StyleSheet, View} from 'react-native';
 import DatePicker from './datepicker';
+import {useRef} from 'react';
 
 export default function App() {
+  const badgeDates = useRef<Record<string, boolean>>({
+    '2024/04/02': true,
+  });
+
   return (
     <View style={styles.container}>
       <DatePicker
@@ -19,6 +24,7 @@ export default function App() {
         // configs={configs}
         // mode={mode}
         mode="calendar"
+        badgeDates={badgeDates.current}
         // current={
         //   date ? format(date, MODERN_DATEPICKER_CALENDAR_FORMAT) : undefined
         // }
