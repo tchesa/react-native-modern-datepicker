@@ -36,7 +36,6 @@ class Utils {
   data: {
     minimumDate?: string;
     maximumDate?: string;
-    reverse?: boolean;
   };
 
   config: Configs;
@@ -45,19 +44,16 @@ class Utils {
     minimumDate,
     maximumDate,
     mode,
-    reverse,
     configs = {},
   }: {
     minimumDate?: string;
     maximumDate?: string;
     mode?: Mode;
-    reverse?: true | false | 'unset';
     configs?: Object;
   }) {
     this.data = {
       minimumDate,
       maximumDate,
-      reverse: reverse === 'unset',
     };
     this.config = gregorianConfigs;
     this.config = {...this.config, ...configs};
@@ -67,7 +63,9 @@ class Utils {
   }
 
   get flexDirection(): StyleProp<ViewStyle> {
-    return {flexDirection: this.data.reverse ? (I18nManager.isRTL ? 'row' : 'row-reverse') : 'row'};
+    return {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row'
+    };
   }
 
   getFormated = (

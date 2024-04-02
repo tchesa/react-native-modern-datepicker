@@ -58,7 +58,6 @@ type Props = {
   selectorEndingYear?: number;
   disableDateChange?: boolean;
   configs?: Configs;
-  reverse?: true | false | 'unset';
   options?: Options;
   mode?: Mode;
   minuteInterval?: MinuteInterval;
@@ -85,7 +84,6 @@ const DatePicker = ({
   selectorEndingYear = 3000,
   disableDateChange = false,
   configs,
-  reverse = 'unset',
   options,
   mode = 'datepicker',
   minuteInterval = 5,
@@ -95,7 +93,6 @@ const DatePicker = ({
     minimumDate,
     maximumDate,
     configs,
-    reverse,
     mode,
   });
 
@@ -103,7 +100,6 @@ const DatePicker = ({
     onSelectedChange,
     onDateChange,
     mode,
-    reverse: reverse === 'unset' ? false : reverse,
     options: {...defaultOptions, ...options},
     utils: calendarUtils,
     disableDateChange,
@@ -202,7 +198,6 @@ DatePicker.defaultProps = {
   selectorEndingYear: 3000,
   disableDateChange: false,
   configs: {},
-  reverse: 'unset',
   options: {},
   mode: 'datepicker',
   minuteInterval: 5,
@@ -222,7 +217,6 @@ DatePicker.propTypes = {
   selectorEndingYear: PropTypes.number,
   disableDateChange: PropTypes.bool,
   configs: PropTypes.object,
-  reverse: PropTypes.oneOf([true, false, 'unset']),
   options: PropTypes.shape(optionsShape),
   mode: PropTypes.oneOf(modeArray),
   minuteInterval: PropTypes.oneOf(minuteIntervalArray),
