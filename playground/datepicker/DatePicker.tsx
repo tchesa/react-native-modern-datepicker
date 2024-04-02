@@ -165,7 +165,6 @@ const DatePicker = ({
   });
 
   const contextValue: CalendarContextType = {
-    // ...props,
     onSelectedChange,
     onDateChange,
     mode,
