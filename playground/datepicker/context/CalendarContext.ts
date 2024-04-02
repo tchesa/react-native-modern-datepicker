@@ -5,7 +5,6 @@ import {Mode} from '../types';
 
 export type CalendarContextType = {
   mode: Mode;
-  reverse: boolean;
   options: Options;
   utils: Utils;
   state: [CalendarState, Dispatch<Action>];
@@ -39,13 +38,11 @@ export const defaultOptions: Options = {
 
 const CalendarContext = createContext<CalendarContextType>({
   mode: 'datepicker',
-  reverse: false,
   options: defaultOptions,
   utils: new Utils({
     minimumDate: '',
     maximumDate: '',
     configs: {},
-    reverse: false,
     mode: 'datepicker',
   }),
   state: [
