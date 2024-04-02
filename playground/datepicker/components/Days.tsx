@@ -5,7 +5,7 @@ import type{Options } from '../DatePicker';
 import useCalendar from '../hooks/useCalendar';
 
 const Days = () => {
-  const {options, state, utils, onDateChange} = useCalendar();
+  const {options, state, utils, onDateChange, badgeDates } = useCalendar();
   const [mainState, setMainState] = state;
   const [itemSize, setItemSize] = useState(0);
   const style = styles(options);
@@ -53,6 +53,9 @@ const Days = () => {
                 ]}>
                 {day.dayString}
               </Text>
+              {badgeDates?.[day.date] && (
+                <View style={style.badge} />
+              )}
             </TouchableOpacity>
           )}
         </View>
@@ -73,6 +76,7 @@ const styles = (theme: Options) =>
       justifyContent: 'center',
       alignItems: 'center',
       margin: 3,
+      position: 'relative',
     },
     dayItemSelected: {
       backgroundColor: theme.mainColor,
@@ -91,6 +95,16 @@ const styles = (theme: Options) =>
     dayTextDisabled: {
       opacity: 0.2,
     },
+    badge: {
+      width: 6,
+      height: 6,
+      borderRadius: 3,
+      backgroundColor: theme.badgeColor,
+      position: 'absolute',
+      bottom: 5,
+      right: '50%',
+      transform: [{translateX: 3}],
+    }
   });
 
 export default Days;

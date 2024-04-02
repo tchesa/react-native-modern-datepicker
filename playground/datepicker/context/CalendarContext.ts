@@ -18,6 +18,7 @@ export type CalendarContextType = {
   onMonthYearChange?: (formattedDate: string) => void;
   minuteInterval: MinuteInterval;
   onTimeChange?: (time: string) => void;
+  badgeDates?: Record<string, boolean>;
 };
 
 export const defaultOptions: Options = {
@@ -34,6 +35,7 @@ export const defaultOptions: Options = {
   textHeaderFontSize: 17,
   headerAnimationDistance: 100,
   daysAnimationDistance: 200,
+  badgeColor: '#C22A43',
 };
 
 const CalendarContext = createContext<CalendarContextType>({
