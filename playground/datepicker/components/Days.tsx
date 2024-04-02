@@ -9,7 +9,7 @@ const Days = () => {
   const [mainState, setMainState] = state;
   const [width, setWidth] = useState(0);
   const style = styles(options);
-  const days = useMemo(() => utils.getMonthDays(mainState.activeDate), []);
+  const days = useMemo(() => utils.getMonthDays(mainState.activeDate), [mainState.activeDate]);
 
   const onSelectDay = (date: string) => {
     setMainState({
